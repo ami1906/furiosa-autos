@@ -5,3 +5,81 @@ html {
 body {
 	padding: 2rem;
 }
+
+.active{
+	background-color: #337ab7; 
+	color: white
+}
+// css for left widget
+.left-widget{
+
+	select{
+		height: 35px;
+    	width: 80%;
+    	background-color: white;
+	}
+}
+
+// css for review search page
+.review-search{
+	height:50px;
+	
+	input{
+		height:40px;
+		border-radius: 5px;
+		padding-left:5px;
+	}
+	
+	.search
+	{
+		position: relative;
+		padding-right: 0px;
+		padding-left: 0px;
+		
+		input{
+			width:100%;
+		}
+
+		.close{
+			position: absolute;
+		    top: 11px;
+		    right: 10px;
+		    
+		    a{
+				font-size: 18px;
+				text-decoration:none;
+			}
+		}
+	}
+
+	.search-btn{
+		padding-left:5px;
+		
+		input{
+			background-color: #337ab7;
+		    color: white;
+		}
+	}
+} 
+
+// responsive styles for all pages
+@media(max-width:768px)
+{
+	*{
+		font-size: 12px;
+	}
+	h1,h2{
+		font-size:25px;	
+	}
+	h3,h4{
+		font-size:16px;	
+	}
+
+}
+
+
+
+
+
+
+

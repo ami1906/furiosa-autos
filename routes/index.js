@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var api = require('../lib/api');
+var utils = require('../lib/utils');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,8 +14,13 @@ router.get('/', function(req, res, next) {
 */
 router.get('/models', function(req, res, next) {
 	// use api to get models and render output
-	res.render('models');
+	api.fetchModels().then(function(models){
+		// get data that needs to be rendered in view based on sort option using sortModels helper
+		var models = utils.sortModels(models,req.query.sort);
+		res.render('models',{models:models});
+	});
 });
+
 
 /*
 * Task 2:
@@ -22,7 +28,11 @@ router.get('/models', function(req, res, next) {
 */
 router.get('/services', function(req, res, next) {
 	// use api to get services and render output
-	res.render('services');
+	api.fetchServices().then(function(services){
+		// get data that needs to be rendered in view based on filter option using filterServices helper
+		var services = utils.filterServices(services,req.query.filter);
+		res.render('services',{services:services});
+	});
 });
 
 /*
@@ -32,8 +42,10 @@ router.get('/services', function(req, res, next) {
 */
 router.get('/reviews', function(req, res, next) {
 	return Promise.all([api.fetchCustomerReviews(), api.fetchCorporateReviews()])
-		.then(function(reviews) {
-			res.render('reviews', {reviews: reviews});
+		.then(function(reviewSet) {
+			// get data that needs to be rendered in view based on query using filterReviews helper
+			var reviews = utils.filterReviews(reviewSet,req.query.q); 
+			res.render('reviews', {reviews: reviews, query: req.query.q});
 		});
 });
 

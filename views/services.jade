@@ -1,13 +1,22 @@
 extends _shared
-
+block links
+	-var selected = 'Services';
 block body
-	.services
-		h2 Services we provide
-
-		//- Implement filtering here
-
-		for service in services
-			h4= service.job
-			p= service.cost
-			p= service.type
+	div.row
+		div(class='col-lg-3 col-xs-12')
+			div(class='left-widget')
+				h2 Filter By Type
+				hr
+				select(onchange="location = this.value;")
+					for opt in services.filterOptions
+						option(value=opt.href,selected=opt.selected)= opt.key 
+		div(class='col-lg-9 col-xs-12')
+			.services
+				h2 Services we provide
+				//- Implement filtering here
+				for service in services.filteredData
+					h4= service.job
+					p= service.cost
+					p= service.type
+	
 

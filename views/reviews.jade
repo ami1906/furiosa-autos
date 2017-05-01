@@ -1,12 +1,20 @@
 extends _shared
-
+block links
+	-var selected = 'Reviews';
 block body
 	.reviews
-		h2 Customer reviews
-
-		//- Implement search here
-
-		for review in reviews
-			blockquote
-				p= review.content
-				footer= review.source
+		div.review-search
+			form(action='/reviews') 
+				div(class="col-lg-11 col-sm-8 col-xs-8 search")
+					input(type="text", placeholder='Search Reviews', name='q', value=query)
+					span.close 
+						a(href='/reviews') X
+				div(class="col-lg-1 col-sm-8 col-xs-4 search-btn")
+					input(type='submit', value='Search' class="submit") 
+		div.review-list
+			h2 Customer reviews
+			//- Implement search here
+			for review in reviews
+				blockquote
+					p= review.content
+					footer= review.source
